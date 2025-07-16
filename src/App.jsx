@@ -41,6 +41,7 @@ import { OrderProvider } from './assets/contexts/OrderContext';
 import { AuthProvider } from './assets/contexts/AuthContext';
 import SalesReportsPage from "./assets/Pages/SalesReportsPage";
 import MembershipLevel from "./assets/Pages/MembershipLevel";
+import LoyaltyPredict from "./assets/Pages/LoyaltyPredict";
 
 function App() {
   return (
@@ -73,6 +74,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/Pelanggan" element={<CustomerManagement />} />
           <Route path="/sales" element={<SalesManagement />} />
+          <Route path="/loyalty-predict" element={<LoyaltyPredict />} />
           <Route path="/product" element={<ProductManagement />} />
           <Route path="/complaint-form" element={<ComplaintForm />} />
           <Route path="/loyalty" element={<MembershipLevel />} />

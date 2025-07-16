@@ -14,33 +14,36 @@ import {
   Gift, // Ikon untuk Hadiah (digunakan untuk Loyalty)
   ClipboardList, // Ikon untuk Daftar
   History, // Ikon untuk Riwayat
-} from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+} from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
-const HAWAII_LOGO_URL = './images/logo hawai.png';
+const HAWAII_LOGO_URL = "./images/logo hawai.png";
 
 const menuItems = [
-  { name: 'Dashboard', icon: <LayoutDashboard />, path: '/dashboard' },
-  { name: 'Produk', icon: <Box />, path: '/product' },
-  { name: 'Pelanggan', icon: <Users />, path: '/pelanggan' },
-  { name: 'Penjualan', icon: <ShoppingCart />, path: '/penjualan' },
-  { name: 'Loyalty', icon: <Gift />, path: '/loyalty' }, // Ganti ikon di sini
-  { name: 'Laporan', icon: <BarChart2 />, path: '/laporan-penjualan' },
-  { name: 'Keluhan & Layanan', icon: <FileText />, path: '/masukan' },
-  { name: 'Promo', icon: <Tag />, path: '/promo' },
-  { name: 'Artikel', icon: <Newspaper />, path: '/artikel' },
+  { name: "Dashboard", icon: <LayoutDashboard />, path: "/dashboard" },
+  { name: "Produk", icon: <Box />, path: "/product" },
+  { name: "Pelanggan", icon: <Users />, path: "/pelanggan" },
+  { name: "Penjualan", icon: <ShoppingCart />, path: "/penjualan" },
+  { name: "Loyalty", icon: <Gift />, path: "/loyalty" }, // Ganti ikon di sini
+  { name: "Laporan", icon: <BarChart2 />, path: "/laporan-penjualan" },
+  { name: "Keluhan & Layanan", icon: <FileText />, path: "/masukan" },
+  { name: "Promo", icon: <Tag />, path: "/promo" },
+  { name: "Artikel", icon: <Newspaper />, path: "/artikel" },
+  {
+    name: "Prediksi Loyalitas",
+    icon: <ClipboardList />,
+    path: "/loyalty-predict",
+  },
 ];
 
-const accountItems = [
-  { name: 'Logout', icon: <LogOut />, path: '/logout' },
-];
+const accountItems = [{ name: "Logout", icon: <LogOut />, path: "/logout" }];
 
 const Sidebar = () => {
   const location = useLocation();
 
   const isActive = (path) => {
-    if (path === '/') {
-      return location.pathname === '/';
+    if (path === "/") {
+      return location.pathname === "/";
     }
     return location.pathname.startsWith(path);
   };
@@ -67,8 +70,8 @@ const Sidebar = () => {
               font-medium text-base transition-all duration-200 ease-in-out
               ${
                 isActive(item.path)
-                  ? 'bg-[#B82329] text-white shadow-md'
-                  : 'text-[#B82329] hover:bg-[#FDD5D5] hover:text-[#B82329]'
+                  ? "bg-[#B82329] text-white shadow-md"
+                  : "text-[#B82329] hover:bg-[#FDD5D5] hover:text-[#B82329]"
               }
             `}
           >
@@ -80,7 +83,9 @@ const Sidebar = () => {
 
       {/* Bagian Akun dengan judul "AKUN" */}
       <div className="mt-8 pt-4 border-t border-gray-200">
-        <div className="text-xs font-semibold text-gray-500 uppercase mb-3 px-2">AKUN</div>
+        <div className="text-xs font-semibold text-gray-500 uppercase mb-3 px-2">
+          AKUN
+        </div>
         <nav className="space-y-2">
           {accountItems.map((item) => (
             <Link
@@ -90,8 +95,8 @@ const Sidebar = () => {
                 flex items-center gap-3 px-4 py-2.5 rounded-lg
                 ${
                   isActive(item.path)
-                    ? 'bg-[#B82329] text-white shadow-md'
-                    : 'text-[#B82329] hover:bg-[#FDD5D5] hover:text-[#B82329]'
+                    ? "bg-[#B82329] text-white shadow-md"
+                    : "text-[#B82329] hover:bg-[#FDD5D5] hover:text-[#B82329]"
                 }
               `}
             >
