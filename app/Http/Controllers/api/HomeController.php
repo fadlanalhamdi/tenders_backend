@@ -14,19 +14,23 @@ class HomeController extends Controller
     // Get all data for homepage
     public function index()
     {
-        // Get banners
+       // Ambil banner dari database
         $banners = Banner::where('status', 'active')
-                        ->orderBy('order')
-                        ->get();
+                         ->orderBy('order')
+                         ->get();
         
-        // If no banners in database, use default
+        // Jika tidak ada banner, gunakan default
         if ($banners->isEmpty()) {
             $banners = collect([
-                ['id' => 1, 'image' => '/images/tenders-banner-1.jpg', 'title' => 'Banner 1'],
-                ['id' => 2, 'image' => '/images/tenders-banner-2.jpg', 'title' => 'Banner 2'],
-                ['id' => 3, 'image' => '/images/tenders-banner-3.jpg', 'title' => 'Banner 3'],
+                ['id' => 1, 'image' => '/images/tenders-banner-1.jpg', 'title' => 'Coming Soon'],
+                ['id' => 2, 'image' => '/images/tenders-banner-2.jpg', 'title' => 'Big Sale Promo'],
+                ['id' => 3, 'image' => '/images/tenders-banner-3.jpg', 'title' => 'Free Delivery'],
             ]);
         }
+        
+       
+
+        
         
         // Get popular products
         $popularProducts = Product::where('status', 'active')

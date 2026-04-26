@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AdminUserSeeder::class,
             ProductSeeder::class,
+            PromoSeeder::class,
+            BannerSeeder::class,
         ]);
         User::factory()->create([
             'name' => 'Test User',

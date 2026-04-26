@@ -8,17 +8,23 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminUserSeeder extends Seeder
 {
-    public function run(): void
+    public function run()
     {
-        DB::table('users')->insert([
-            'username' => 'admin',
-            'email' => 'admin@tenderspku.com',
-            'password' => Hash::make('admin123'),
-            'full_name' => 'Administrator',
-            'role' => 'admin',
-            'email_verified_at' => now(),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        // Hapus atau comment yang lama
+        // DB::table('users')->insert([...]);
+        
+        // Gunakan kolom yang benar: 'full_name' bukan 'name'
+        DB::table('users')->updateOrInsert(
+            ['email' => 'admin@tenderspku.com'],
+            [
+                'username' => 'admin',
+                'email' => 'admin@tenderspku.com',
+                'password' => Hash::make('admin123'),
+                'full_name' => 'Administrator',
+                'role' => 'admin',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
     }
 }
