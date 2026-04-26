@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\CustomerController;
+use App\Http\Controllers\api\LoyaltyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,8 @@ Route::prefix('users')->group(function () {
     Route::put('/{id}', [CustomerController::class, 'update']);
     Route::delete('/{id}', [CustomerController::class, 'destroy']);
 });
+
+Route::apiResource('loyalties', LoyaltyController::class);
 
 // 4. Product Routes
 Route::get('/products', [ProductController::class, 'index']);
