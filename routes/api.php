@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\api\LoyaltyController;
+use App\Http\Controllers\api\PredictionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +38,7 @@ Route::prefix('users')->group(function () {
 });
 
 Route::apiResource('loyalties', LoyaltyController::class);
-
+Route::get('/predict/user/{id}', [PredictionController::class, 'getCustomerData']);
 // 4. Product Routes
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{id}', [ProductController::class, 'show']);
