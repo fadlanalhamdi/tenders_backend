@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import tailwindcss from '@tailwindcss/vite';
@@ -16,3 +17,12 @@ export default defineConfig({
         },
     },
 });
+=======
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+})
+>>>>>>> 91e48ed1552c0e6a38c2b98973077fb7703fb1fa
