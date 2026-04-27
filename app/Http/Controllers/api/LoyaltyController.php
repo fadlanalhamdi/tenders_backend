@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Loyalty;
 use Illuminate\Http\Request;
 
 class LoyaltyController extends Controller

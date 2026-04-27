@@ -1,17 +1,17 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\ComboController;
 use App\Http\Controllers\API\ComplaintController;
+use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\HomeController;
+use App\Http\Controllers\api\LoyaltyController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\api\PredictionController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\PromoController;
-
-
-use App\Http\Controllers\Api\CustomerController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +58,10 @@ Route::post('/promos', [PromoController::class, 'store']);
 Route::put('/promos/{id}', [PromoController::class, 'update']);
 Route::delete('/promos/{id}', [PromoController::class, 'destroy']);
 
+// ========== PRODUCT ROUTES ==========
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/{id}', [ProductController::class, 'show']);
+Route::get('/categories', [ProductController::class, 'categories']);
 
 Route::get('/combos', [ComboController::class, 'index']);
 Route::get('/combos/admin', [ComboController::class, 'adminIndex']);
@@ -90,6 +94,9 @@ Route::prefix('users')->group(function () {
     Route::delete('/{id}', [CustomerController::class, 'destroy']);
 });
 
+
+Route::apiResource('loyalties', LoyaltyController::class);
+Route::get('/predict/user/{id}', [PredictionController::class, 'getCustomerData']);
 // 4. Product Routes
 
 Route::get('/categories', [ProductController::class, 'categories']);
