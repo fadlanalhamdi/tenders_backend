@@ -41,7 +41,7 @@ class AuthController extends Controller
         }
 
         // Generate token (pastikan sudah install sanctum)
-        $token = $user->createToken('auth_token')->plainTextToken;
+        // $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
             'success' => true,
@@ -53,7 +53,7 @@ class AuthController extends Controller
                 'full_name' => $user->full_name,
                 'role' => $user->role,
             ],
-            'token' => $token
+            // 'token' => $token
         ]);
     }
 
