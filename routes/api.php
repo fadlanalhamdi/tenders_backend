@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\ComboController;
@@ -8,34 +9,26 @@ use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\PromoController;
-use Illuminate\Support\Facades\Route;
 
 
-// Test route
+use App\Http\Controllers\Api\CustomerController;
+
+/*
+|--------------------------------------------------------------------------
+| Tenders.pku API Routes
+|--------------------------------------------------------------------------
+*/
+
+// 1. Test Route & Home
 Route::get('/', function () {
     return response()->json(['success' => true, 'message' => 'Tenders PKU API running']);
 });
 
-// Home Data - PASTIKAN INI ADA
-Route::get('/home', [HomeController::class, 'index']);
-
-// Auth Routes
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/register', [AuthController::class, 'register']);
-
-// Product Routes (Public)
 
 
-// Categories
-Route::get('/categories', [ProductController::class, 'categories']);
 
-// Protected Routes (Admin only)
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::post('/products', [ProductController::class, 'store']);
-    Route::put('/products/{id}', [ProductController::class, 'update']);
-    Route::delete('/products/{id}', [ProductController::class, 'destroy']);
 
-});
+
 
 
 Route::middleware(['auth:sanctum'])->group(function () {
@@ -52,7 +45,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // routes/api.php
     Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
 
-   Route::get('/notifications', [OrderController::class, 'getNotifications']);
+    Route::get('/notifications', [OrderController::class, 'getNotifications']);
     Route::get('/notifications/unread-count', [OrderController::class, 'unreadCount']);
     Route::put('/notifications/{id}/read', [OrderController::class, 'markAsRead']);
     Route::put('/notifications/read-all', [OrderController::class, 'markAllAsRead']);
@@ -81,4 +74,33 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/admin/complaints/{id}/status', [ComplaintController::class, 'updateStatus']);
     Route::post('/admin/complaints/{id}/respond', [ComplaintController::class, 'respond']);
     Route::delete('/admin/complaints/{id}', [ComplaintController::class, 'destroy']);
+});
+Route::get('/home', [HomeController::class, 'index']);
+
+// 2. Auth Routes
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+
+// 3. Pelanggan / Customer Routes (Bypass Middleware sementara untuk Testing CRUD)
+// Sesuai dengan request ManajemenPelangganPage.jsx
+Route::prefix('users')->group(function () {
+    Route::get('/', [CustomerController::class, 'index']);
+    Route::post('/', [CustomerController::class, 'store']);
+    Route::put('/{id}', [CustomerController::class, 'update']);
+    Route::delete('/{id}', [CustomerController::class, 'destroy']);
+});
+
+// 4. Product Routes
+
+Route::get('/categories', [ProductController::class, 'categories']);
+
+// 5. Protected Routes (Gunakan jika token Sanctum sudah stabil)
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/me', [AuthController::class, 'me']);
+
+    // Admin Only - Produk
+    Route::post('/products', [ProductController::class, 'store']);
+    Route::put('/products/{id}', [ProductController::class, 'update']);
+    Route::delete('/products/{id}', [ProductController::class, 'destroy']);
 });
